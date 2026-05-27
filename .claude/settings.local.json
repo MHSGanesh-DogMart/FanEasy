@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter analyze:*)",
+      "Bash(where pdftoppm *)",
+      "Bash(where pdftocairo *)",
+      "Bash(where pdfinfo *)",
+      "Skill(anthropic-skills:pdf)",
+      "Skill(anthropic-skills:pdf:*)",
+      "Bash(python -c \"import pypdfium2; print\\(pypdfium2.__version__\\)\")",
+      "Bash(python -c ' *)",
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(git config *)",
+      "Bash(git add *)"
+    ]
+  }
+}

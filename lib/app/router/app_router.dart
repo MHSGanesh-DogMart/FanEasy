@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+
+import '../../features/main_navigation/presentation/screens/main_screen.dart';
+import 'app_routes.dart';
+
+/// Centralised `onGenerateRoute` so new screens can be wired up here
+/// instead of scattering `MaterialPageRoute` calls across the codebase.
+class AppRouter {
+  AppRouter._();
+
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case AppRoutes.root:
+        return _buildRoute(settings, const MainScreen());
+      default:
+        return _buildRoute(settings, const MainScreen());
+    }
+  }
+
+  static MaterialPageRoute<dynamic> _buildRoute(
+    RouteSettings settings,
+    Widget page,
+  ) =>
+      MaterialPageRoute(settings: settings, builder: (_) => page);
+}
