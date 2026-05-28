@@ -9,4 +9,5 @@ class AppRoutes {
   static const String miamiFans = '/miami-fans';
   static const String miamiFanPages = '/miami-fanpages';
   static const String miamiMatches = '/miami-matches';
+  static const String fanPageDetail = '/fan-page-detail';
 }

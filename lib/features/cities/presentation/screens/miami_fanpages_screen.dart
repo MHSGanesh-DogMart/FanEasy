@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../app/router/app_routes.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../data/mock_cities_data.dart';
@@ -100,18 +101,20 @@ class _CustomFanPageCardState extends State<_CustomFanPageCard> {
     }
     final String combinedSubtitle = '$cleanFansLabel | ${widget.fanPage.subtitle}';
 
-    return Container(
-      height: 270.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
-            offset: const Offset(0, 8),
-            blurRadius: 16,
-          ),
-        ],
-      ),
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, AppRoutes.fanPageDetail),
+      child: Container(
+        height: 270.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(28.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.08),
+              offset: const Offset(0, 8),
+              blurRadius: 16,
+            ),
+          ],
+        ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24.r),
         child: Stack(
@@ -159,6 +162,7 @@ class _CustomFanPageCardState extends State<_CustomFanPageCard> {
             ),
           ],
         ),
+      ),
       ),
     );
   }

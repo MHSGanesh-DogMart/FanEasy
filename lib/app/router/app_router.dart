@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../features/cities/presentation/screens/fans_in_miami_screen.dart';
 import '../../features/cities/presentation/screens/miami_fanpages_screen.dart';
 import '../../features/cities/presentation/screens/miami_matches_screen.dart';
+import '../../features/fan_pages/presentation/screens/fan_page_detail_screen.dart';
 import '../../features/main_navigation/presentation/screens/main_screen.dart';
 import 'app_routes.dart';
 
@@ -21,6 +22,8 @@ class AppRouter {
         return _buildRoute(settings, const MiamiFanPagesScreen());
       case AppRoutes.miamiMatches:
         return _buildRoute(settings, const MiamiMatchesScreen());
+      case AppRoutes.fanPageDetail:
+        return _buildRoute(settings, const FanPageDetailScreen());
       default:
         return _buildRoute(settings, const MainScreen());
     }
