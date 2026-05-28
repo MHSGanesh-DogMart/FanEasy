@@ -93,7 +93,7 @@ class _NavTab extends StatelessWidget {
           height: 54.h,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: selected ? AppColors.brandTint : Colors.transparent,
+            color: selected ? AppColors.brandSoft : Colors.transparent,
             borderRadius: BorderRadius.circular(100.r),
           ),
           padding: EdgeInsets.symmetric(horizontal: 8.w),

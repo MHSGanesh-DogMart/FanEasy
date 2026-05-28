@@ -54,12 +54,12 @@ const List<HostCity> kMockHostCities = <HostCity>[
     flag: '🇺🇸',
     coverUrl:
         'https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=900',
-    fansVisiting: '3.4K',
+    fansVisiting: '184K',
     fanPages: 32,
     matches: 6,
   ),
   HostCity(
-    name: 'New York',
+    name: 'Washington',
     flag: '🇺🇸',
     coverUrl:
         'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=900',
@@ -68,31 +68,13 @@ const List<HostCity> kMockHostCities = <HostCity>[
     matches: 8,
   ),
   HostCity(
-    name: 'Los Angeles',
+    name: 'Denver',
     flag: '🇺🇸',
     coverUrl:
         'https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=900',
     fansVisiting: '4.2K',
     fanPages: 41,
     matches: 7,
-  ),
-  HostCity(
-    name: 'Atlanta',
-    flag: '🇺🇸',
-    coverUrl:
-        'https://images.unsplash.com/photo-1575917649705-5b59aaa12e6b?w=900',
-    fansVisiting: '2.8K',
-    fanPages: 24,
-    matches: 5,
-  ),
-  HostCity(
-    name: 'Dallas',
-    flag: '🇺🇸',
-    coverUrl:
-        'https://images.unsplash.com/photo-1545194445-dddb8f4487c6?w=900',
-    fansVisiting: '3.0K',
-    fanPages: 28,
-    matches: 5,
   ),
   HostCity(
     name: 'Seattle',
@@ -102,6 +84,24 @@ const List<HostCity> kMockHostCities = <HostCity>[
     fansVisiting: '2.1K',
     fanPages: 19,
     matches: 4,
+  ),
+  HostCity(
+    name: 'Boston',
+    flag: '🇺🇸',
+    coverUrl:
+        'https://images.unsplash.com/photo-1545194445-dddb8f4487c6?w=900',
+    fansVisiting: '3.0K',
+    fanPages: 28,
+    matches: 5,
+  ),
+  HostCity(
+    name: 'Atlanta',
+    flag: '🇺🇸',
+    coverUrl:
+        'https://images.unsplash.com/photo-1575917649705-5b59aaa12e6b?w=900',
+    fansVisiting: '2.8K',
+    fanPages: 24,
+    matches: 5,
   ),
 ];
 

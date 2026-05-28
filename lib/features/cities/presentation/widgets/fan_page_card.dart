@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,12 +10,20 @@ import '../../domain/models/fan_page.dart';
 ///
 /// A cover image fills the card, a dark gradient anchors the text at
 /// the bottom: fan-count pill, page name with optional verified tick,
-/// short subtitle, and a "Follow" button.
-class FanPageCard extends StatelessWidget {
+/// short subtitle, and a bouncy interactive Follow/Following button.
+class FanPageCard extends StatefulWidget {
   const FanPageCard({super.key, required this.fanPage, this.onFollow});
 
   final FanPage fanPage;
   final VoidCallback? onFollow;
+
+  @override
+  State<FanPageCard> createState() => _FanPageCardState();
+}
+
+class _FanPageCardState extends State<FanPageCard> {
+  bool _isFollowing = false;
+  bool _isPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,26 +31,21 @@ class FanPageCard extends StatelessWidget {
       width: 280.w,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.r)),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(24.r),
+        borderRadius: BorderRadius.circular(20.r),
         child: Stack(
           fit: StackFit.expand,
           children: [
             Image.network(
-              fanPage.coverUrl,
+              widget.fanPage.coverUrl,
               fit: BoxFit.cover,
-              errorBuilder: (_, _, _) =>
-                  Container(color: AppColors.lightGrey),
+              errorBuilder: (_, _, _) => Container(color: AppColors.lightGrey),
             ),
             Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Color(0x99000000),
-                    Colors.black,
-                  ],
+                  colors: [Colors.transparent, Color(0x99000000), Colors.black],
                   stops: [0.35, 0.75, 1.0],
                 ),
               ),
@@ -60,7 +63,7 @@ class FanPageCard extends StatelessWidget {
                   _nameRow(),
                   SizedBox(height: 4.h),
                   Text(
-                    fanPage.subtitle,
+                    widget.fanPage.subtitle,
                     style: GoogleFonts.inter(
                       color: Colors.white.withValues(alpha: 0.85),
                       fontSize: 12.sp,
@@ -91,7 +94,7 @@ class FanPageCard extends StatelessWidget {
           Icon(Icons.group_rounded, color: Colors.white, size: 12.r),
           SizedBox(width: 6.w),
           Text(
-            fanPage.fansLabel,
+            widget.fanPage.fansLabel,
             style: GoogleFonts.inter(
               color: Colors.white,
               fontSize: 11.sp,
@@ -108,7 +111,7 @@ class FanPageCard extends StatelessWidget {
       children: [
         Flexible(
           child: Text(
-            fanPage.name,
+            widget.fanPage.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.inter(
@@ -119,7 +122,7 @@ class FanPageCard extends StatelessWidget {
             ),
           ),
         ),
-        if (fanPage.verified) ...[
+        if (widget.fanPage.verified) ...[
           SizedBox(width: 6.w),
           Icon(Icons.verified_rounded, color: Colors.white, size: 16.r),
         ],
@@ -129,20 +132,49 @@ class FanPageCard extends StatelessWidget {
 
   Widget _followButton() {
     return GestureDetector(
-      onTap: onFollow,
-      child: Container(
-        height: 38.h,
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.18),
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          AppStrings.follow,
-          style: GoogleFonts.inter(
-            color: Colors.white,
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
+      onTapDown: (_) => setState(() => _isPressed = true),
+      onTapUp: (_) {
+        setState(() {
+          _isPressed = false;
+          _isFollowing = !_isFollowing;
+        });
+        if (widget.onFollow != null) widget.onFollow!();
+      },
+      onTapCancel: () => setState(() => _isPressed = false),
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedScale(
+        scale: _isPressed ? 0.95 : 1.0,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeOut,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInOut,
+          height: 38.h,
+          decoration: BoxDecoration(
+            color: _isFollowing
+                ? Colors.white.withValues(alpha: 0.55)
+                : Colors.white.withValues(alpha: 0.08),
+            borderRadius: BorderRadius.circular(12.r),
+            border: Border.all(
+              color: _isFollowing
+                  ? Colors.white.withValues(alpha: 0.78)
+                  : Colors.white.withValues(alpha: 0.24),
+              width: 1.w,
+            ),
+          ),
+          alignment: Alignment.center,
+          child: AnimatedDefaultTextStyle(
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeInOut,
+            style: GoogleFonts.inter(
+              color: _isFollowing ? const Color(0xFF1C1C1E) : Colors.white,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+            ),
+            child: Text(
+              _isFollowing ? 'Following' : AppStrings.follow,
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),

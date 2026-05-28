@@ -6,7 +6,7 @@ import '../../../../core/constants/app_strings.dart';
 import '../../../../core/theme/app_colors.dart';
 
 /// Top bar for the Cities tab: "Host Cities" title on the left, profile
-/// avatar (with online dot) on the right.
+/// avatar on the right.
 class CitiesAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CitiesAppBar({super.key});
 
@@ -35,37 +35,42 @@ class CitiesAppBar extends StatelessWidget implements PreferredSizeWidget {
                 letterSpacing: -0.4,
               ),
             ),
-            const Spacer(),
-            _avatar(),
+            // const Spacer(),
           ],
         ),
       ),
+      actions: [
+        Row(
+          children: [
+            _avatar(),
+            SizedBox(width: 20.w),
+          ],
+        ),
+      ],
     );
   }
 
   Widget _avatar() {
-    return Stack(
-      children: [
-        CircleAvatar(
-          radius: 22.r,
-          backgroundImage: const NetworkImage(
-            'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format',
+    return Container(
+      width: 44.r,
+      height: 44.r,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.white, width: 2),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x1A000000),
+            offset: Offset(0, 2),
+            blurRadius: 4,
           ),
+        ],
+      ),
+      child: ClipOval(
+        child: Image.network(
+          'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format',
+          fit: BoxFit.cover,
         ),
-        Positioned(
-          right: 0,
-          bottom: 0,
-          child: Container(
-            width: 12.r,
-            height: 12.r,
-            decoration: BoxDecoration(
-              color: AppColors.success,
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 2),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 }

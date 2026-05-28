@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -8,8 +8,9 @@ import '../../data/mock_cities_data.dart';
 import '../../domain/models/league.dart';
 import '../providers/cities_provider.dart';
 
-/// Pill-shaped league filter row. Selected pill has the brand soft-pink
-/// background with brand-coloured text; idle pills have a thin border.
+/// Pill-shaped league filter row.
+/// Selected: brand border + brand text on white.
+/// Unselected: light-grey fill, secondary text, no border.
 class LeagueFilterRow extends StatelessWidget {
   const LeagueFilterRow({super.key});
 
@@ -18,13 +19,15 @@ class LeagueFilterRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 34.h,
-      child: ListView.separated(
+      height: 40.h,
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         itemCount: _leagues.length,
-        separatorBuilder: (_, _) => SizedBox(width: 8.w),
-        itemBuilder: (_, i) => _LeaguePill(league: _leagues[i]),
+        itemBuilder: (_, i) => Padding(
+          padding: EdgeInsets.only(right: i < _leagues.length - 1 ? 8.w : 0),
+          child: _LeaguePill(league: _leagues[i]),
+        ),
       ),
     );
   }
@@ -45,22 +48,22 @@ class _LeaguePill extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
         decoration: BoxDecoration(
-          color: selected ? AppColors.brandSoft : Colors.transparent,
+          color: selected ? AppColors.brandSoft : Color(0xffF2F2ED),
           borderRadius: BorderRadius.circular(100.r),
           border: Border.all(
-            color: selected ? AppColors.brand : AppColors.borderSubtle,
-            width: 1,
+            color: selected ? AppColors.brand : const Color(0xffEBEAEA),
+            width: 1.5,
           ),
         ),
         alignment: Alignment.center,
         child: Text(
           league.label,
           style: GoogleFonts.inter(
-            color: selected ? AppColors.brand : AppColors.textPrimary,
+            color: selected ? AppColors.brand : const Color(0xff626060),
             fontSize: 13.sp,
-            fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+            fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
           ),
         ),
       ),

@@ -24,7 +24,7 @@ class SectionHeader extends StatelessWidget {
             style: GoogleFonts.inter(
               color: AppColors.textPrimary,
               fontSize: 18.sp,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w600,
               letterSpacing: -0.3,
             ),
           ),
@@ -38,7 +38,7 @@ class SectionHeader extends StatelessWidget {
                   AppStrings.viewAll,
                   style: GoogleFonts.inter(
                     color: AppColors.brand,
-                    fontSize: 13.sp,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

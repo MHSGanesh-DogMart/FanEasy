@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -18,13 +18,15 @@ class SportFilterRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 92.h,
-      child: ListView.separated(
+      height: 108.h,
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         itemCount: _sports.length,
-        separatorBuilder: (_, _) => SizedBox(width: 14.w),
-        itemBuilder: (_, i) => _SportTile(sport: _sports[i]),
+        itemBuilder: (_, i) => Padding(
+          padding: EdgeInsets.only(right: i < _sports.length - 1 ? 8.w : 0),
+          child: _SportTile(sport: _sports[i]),
+        ),
       ),
     );
   }
@@ -43,36 +45,49 @@ class _SportTile extends StatelessWidget {
     return GestureDetector(
       onTap: () => context.read<CitiesProvider>().selectSport(sport.id),
       behavior: HitTestBehavior.opaque,
-      child: SizedBox(
-        width: 60.r,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        width: 68.w,
+        decoration: BoxDecoration(
+          color: selected ? Color(0xffF8EDED) : Colors.transparent,
+          borderRadius: BorderRadius.circular(20.r),
+          border: Border.all(
+            color: selected ? AppColors.brand : Colors.transparent,
+            width: 1.5,
+          ),
+        ),
+        padding: EdgeInsets.only(top: 8.h, left: 3.w, right: 3.w, bottom: 3.h),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              padding: EdgeInsets.all(2.r),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: selected ? AppColors.brand : Colors.transparent,
-                  width: 2,
-                ),
-              ),
-              child: CircleAvatar(
-                radius: 26.r,
-                backgroundImage: NetworkImage(sport.imageUrl),
-                backgroundColor: AppColors.lightGrey,
-              ),
-            ),
-            SizedBox(height: 6.h),
             Text(
               sport.label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: GoogleFonts.inter(
                 color: selected ? AppColors.brand : AppColors.textPrimary,
-                fontSize: 12.sp,
-                fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                letterSpacing: -0.2,
+              ),
+            ),
+            SizedBox(height: 6.h),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.r),
+              child: SizedBox(
+                width: 65.r,
+                height: 65.r,
+                child: Image.network(
+                  sport.imageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, _, _) => Container(
+                    color: AppColors.lightGrey,
+                    child: Icon(
+                      Icons.sports_soccer_rounded,
+                      color: AppColors.grey,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

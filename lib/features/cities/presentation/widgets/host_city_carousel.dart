@@ -1,8 +1,8 @@
+import 'package:faneasy/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../data/mock_cities_data.dart';
 import '../providers/cities_provider.dart';
 import 'host_city_card.dart';
@@ -18,18 +18,35 @@ class HostCityCarousel extends StatefulWidget {
 
 class _HostCityCarouselState extends State<HostCityCarousel> {
   late final PageController _controller;
+  CitiesProvider? _provider;
 
   @override
   void initState() {
     super.initState();
+    _provider = context.read<CitiesProvider>();
     _controller = PageController(
-      initialPage: context.read<CitiesProvider>().selectedCityIndex,
+      initialPage: _provider!.selectedCityIndex,
       viewportFraction: 0.92,
     );
+    _provider!.addListener(_onProviderChanged);
+  }
+
+  void _onProviderChanged() {
+    if (_provider != null && _controller.hasClients) {
+      final newIndex = _provider!.selectedCityIndex;
+      if (_controller.page?.round() != newIndex) {
+        _controller.animateToPage(
+          newIndex,
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeInOut,
+        );
+      }
+    }
   }
 
   @override
   void dispose() {
+    _provider?.removeListener(_onProviderChanged);
     _controller.dispose();
     super.dispose();
   }
@@ -38,13 +55,13 @@ class _HostCityCarouselState extends State<HostCityCarousel> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 240.h,
+        Container(
+          color: AppColors.scaffoldBackground,
+          height: 320.h,
           child: PageView.builder(
             controller: _controller,
             itemCount: kMockHostCities.length,
-            onPageChanged: (i) =>
-                context.read<CitiesProvider>().selectCity(i),
+            onPageChanged: (i) => context.read<CitiesProvider>().selectCity(i),
             itemBuilder: (_, i) => Padding(
               padding: EdgeInsets.symmetric(horizontal: 6.w),
               child: HostCityCard(city: kMockHostCities[i]),
@@ -74,12 +91,12 @@ class _Dots extends StatelessWidget {
         final selected = i == active;
         return AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          margin: EdgeInsets.symmetric(horizontal: 3.w),
-          width: selected ? 18.w : 6.w,
-          height: 6.h,
+          margin: EdgeInsets.symmetric(horizontal: 4.w),
+          width: selected ? 7.r : 6.r,
+          height: selected ? 7.r : 6.r,
           decoration: BoxDecoration(
-            color: selected ? AppColors.brand : AppColors.border,
-            borderRadius: BorderRadius.circular(3.r),
+            color: selected ? const Color(0xFF262626) : const Color(0xFFE2E2E2),
+            shape: BoxShape.circle,
           ),
         );
       }),

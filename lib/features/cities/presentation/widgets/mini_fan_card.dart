@@ -1,7 +1,8 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/constants/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../fans/domain/models/fan_profile.dart';
 
@@ -46,11 +47,7 @@ class MiniFanCard extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Color(0xCC000000),
-                    Colors.black,
-                  ],
+                  colors: [Colors.transparent, Color(0xCC000000), Colors.black],
                   stops: [0.35, 0.7, 1.0],
                 ),
               ),
@@ -142,7 +139,7 @@ class MiniFanCard extends StatelessWidget {
         Expanded(
           child: _smallActionBtn(
             color: AppColors.cardActionNope,
-            icon: Icons.favorite_rounded,
+            iconAsset: AppAssets.navLikes,
             onTap: onLike,
           ),
         ),
@@ -150,7 +147,7 @@ class MiniFanCard extends StatelessWidget {
         Expanded(
           child: _smallActionBtn(
             color: AppColors.cardActionSend,
-            icon: Icons.send_rounded,
+            iconAsset: AppAssets.userCardSendMessage,
             onTap: onSend,
           ),
         ),
@@ -160,7 +157,7 @@ class MiniFanCard extends StatelessWidget {
 
   Widget _smallActionBtn({
     required Color color,
-    required IconData icon,
+    required String iconAsset,
     VoidCallback? onTap,
   }) {
     return GestureDetector(
@@ -172,7 +169,13 @@ class MiniFanCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.r),
         ),
         child: Center(
-          child: Icon(icon, color: color, size: 16.r),
+          child: Image.asset(
+            iconAsset,
+            width: 16.r,
+            height: 16.r,
+            color: color,
+            colorBlendMode: BlendMode.srcIn,
+          ),
         ),
       ),
     );

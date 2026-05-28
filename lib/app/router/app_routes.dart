@@ -6,4 +6,7 @@ class AppRoutes {
   AppRoutes._();
 
   static const String root = '/';
+  static const String miamiFans = '/miami-fans';
+  static const String miamiFanPages = '/miami-fanpages';
+  static const String miamiMatches = '/miami-matches';
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../features/cities/presentation/screens/fans_in_miami_screen.dart';
+import '../../features/cities/presentation/screens/miami_fanpages_screen.dart';
+import '../../features/cities/presentation/screens/miami_matches_screen.dart';
 import '../../features/main_navigation/presentation/screens/main_screen.dart';
 import 'app_routes.dart';
 
@@ -12,6 +15,12 @@ class AppRouter {
     switch (settings.name) {
       case AppRoutes.root:
         return _buildRoute(settings, const MainScreen());
+      case AppRoutes.miamiFans:
+        return _buildRoute(settings, const FansInMiamiScreen());
+      case AppRoutes.miamiFanPages:
+        return _buildRoute(settings, const MiamiFanPagesScreen());
+      case AppRoutes.miamiMatches:
+        return _buildRoute(settings, const MiamiMatchesScreen());
       default:
         return _buildRoute(settings, const MainScreen());
     }
