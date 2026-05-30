@@ -25,4 +25,6 @@ class AppAssets {
   static const String userCardRefresh = 'Assets/User_Card/refresh.png';
   static const String userCardLike = 'Assets/User_Card/like.png';
   static const String userCardSendMessage = 'Assets/User_Card/send_message.png';
+  // ── Empty state illustrations ────────────────────────────────────────
+  static const String chatEmptyState = 'Assets/chat_empty_state.png';
 }
