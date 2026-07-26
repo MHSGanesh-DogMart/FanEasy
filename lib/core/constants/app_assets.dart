@@ -8,6 +8,12 @@ class AppAssets {
   // ── Top-level icons ─────────────────────────────────────────────────
   static const String filterIcon = 'Assets/filter.png';
   static const String heartIcon = 'Assets/heart.png';
+  static const String doubleHeartIcon = 'Assets/double_heart.png';
+  static const String matchesHeartIcon = 'Assets/matches_heart.png';
+  static const String deleteChatIcon = 'Assets/delete_chat.png';
+  static const String unmatchUserIcon = 'Assets/unmatch_user.png';
+  static const String blockUserIcon = 'Assets/block_user.png';
+  static const String reportUserIcon = 'Assets/report_user.png';
 
   // ── Bottom navigation icons ─────────────────────────────────────────
   static const String navFans = 'Assets/fans.png';
@@ -27,4 +33,5 @@ class AppAssets {
   static const String userCardSendMessage = 'Assets/User_Card/send_message.png';
   // ── Empty state illustrations ────────────────────────────────────────
   static const String chatEmptyState = 'Assets/chat_empty_state.png';
+  static const String whatsappBg = 'Assets/whatsapp_bg.jpg';
 }

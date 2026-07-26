@@ -118,7 +118,7 @@ const List<FanPage> kMockFanPages = <FanPage>[
     name: 'Brazil Samba Crew',
     subtitle: 'Verde-amarela worldwide.',
     coverUrl:
-        'https://images.unsplash.com/photo-1518126437826-cc1cab2098f4?w=900',
+        'https://images.unsplash.com/photo-1489945052260-4f21c52268b9?w=900',
     fansLabel: '72K fans',
     verified: true,
   ),

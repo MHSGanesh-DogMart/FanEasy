@@ -70,7 +70,7 @@ class FanPagesScreen extends StatelessWidget {
       'name': 'Cleveland Browns',
       'fans': '4.2K Fans',
       'image':
-          'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600',
+          'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=600',
     },
     {
       'name': 'Miami Dolphins',
